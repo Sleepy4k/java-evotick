@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : May 23, 2025, 10:52:15 PM
+    Document   : register
+    Created on : Jun 3, 2025, 9:42:03 PM
     Author     : Pandu
 --%>
 
@@ -10,7 +10,7 @@
 <html>
     <head>
         <jsp:include page="../component/meta.jsp" />
-        <title>Login | ${appName}</title>
+        <title>Register | ${appName}</title>
         <jsp:include page="../component/header/landing.jsp" />
     </head>
     <body class="index-page">
@@ -19,13 +19,23 @@
         <section class="auth-section">
             <div class="text-center mb-4">
                 <h1>Selamat Datang di ${appName}!</h1>
-                <p>Silakan login untuk mengakses layanan kami.</p>
+                <p>Silakan register untuk mengakses layanan kami.</p>
             </div>
 
             <div class="d-flex justify-content-center">
                 <div class="card p-4 shadow auth-card">
                     <h4 class="mb-3 text-center">Login</h4>
-                    <form method="POST" action="${baseUrl}/login">
+                    <form method="POST" action="${baseUrl}/register">
+                        <div class="mb-3">
+                            <label for="full_name" class="form-label visually-hidden">Nama Lengkap</label>
+                            <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Your Full Name" required />
+                            <c:if test="${errors.full_name != null}">
+                                <div class="mt-2">
+                                    ${errors.full_name}
+                                </div>
+                            </c:if>
+                        </div>
+
                         <div class="mb-3">
                             <label for="email" class="form-label visually-hidden">Email</label>
                             <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" required />
