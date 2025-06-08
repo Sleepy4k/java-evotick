@@ -20,18 +20,19 @@ import java.util.logging.Logger;
  *
  * @author Pandu
  */
-public class UserRepository {
+public class AdminRepository {
 
-  public UserRepository() {
+  public AdminRepository() {
+
   }
-
-  private final String INSERT_SQL = "insert into users (user_id, username, full_name, email, password, phone, address) values (?, ?, ?, ?, ?, ?, ?);";
-  private final String UPDATE_SQL = "update users set username = ?, full_name = ?, email = ?, password = ?, phone = ?, address = ? where user_id = ?;";
-  private final String DELETE_SQL = "delete from users where user_id = ?;";
-  private final String SELECT_SQL = "select user_id, username, full_name, email, password, phone, address from users limit ?, ?";
-  private final String COUNT_SQL = "select count(user_id) as total from users";
-  private final String SELECT_ONE_SQL = "select user_id, username, full_name, email, password, phone, address from users where user_id = ?;";
-  private final String SELECT_ONE_CUSTOM_SQL = "select user_id, username, full_name, email, password, phone, address from users where $1 = ?;";
+ 
+  private final String INSERT_SQL = "insert into admin (admin_id, username, full_name, email, password) values (?, ?, ?, ?, ?);";
+  private final String UPDATE_SQL = "update admin set username = ?, full_name = ?, email = ?, password = ? where admin_id = ?;";
+  private final String DELETE_SQL = "delete from admin where admin_id = ?;";
+  private final String SELECT_SQL = "select admin_id, username, full_name, email, password from admin limit ?, ?";
+  private final String COUNT_SQL = "select count(admin_id) as total from admin";
+  private final String SELECT_ONE_SQL = "select admin_id, username, full_name, email, password from admin where admin_id = ?;";
+  private final String SELECT_ONE_CUSTOM_SQL = "select admin_id, username, full_name, email, password from admin where $1 = ?;";
 
   public void insert(Connection db, User user) {
     try (PreparedStatement statement = db.prepareStatement(INSERT_SQL)) {
@@ -43,6 +44,7 @@ public class UserRepository {
       statement.setString(5, user.getPassword());
       statement.setString(6, user.getPhone());
       statement.setString(7, user.getAddress());
+      statement.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
 
       statement.executeUpdate();
     } catch (SQLException ex) {
@@ -59,7 +61,8 @@ public class UserRepository {
       statement.setString(4, user.getPassword());
       statement.setString(5, user.getPhone());
       statement.setString(6, user.getAddress());
-      statement.setString(7, user.getId().toString());
+      statement.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
+      statement.setString(8, user.getId().toString());
 
       statement.executeUpdate();
     } catch (SQLException ex) {
@@ -88,14 +91,12 @@ public class UserRepository {
       try (ResultSet resultSet = statement.executeQuery()) {
         while (resultSet.next()) {
           User user = new User();
-          user.setId(UUID.fromString(resultSet.getString("user_id")));
+          user.setId(UUID.fromString(resultSet.getString("admin_id")));
           user.setUsername(resultSet.getString("username"));
           user.setFull_name(resultSet.getString("full_name"));
           user.setEmail(resultSet.getString("email"));
           user.setPassword(resultSet.getString("password"));
-          user.setPhone(resultSet.getString("phone"));
-          user.setAddress(resultSet.getString("address"));
-          user.setIs_admin(false);
+          user.setIs_admin(true);
           list.add(user);
         }
       }
@@ -129,14 +130,12 @@ public class UserRepository {
       try (ResultSet resultSet = statement.executeQuery()) {
         if (resultSet.next()) {
           user = new User();
-          user.setId(UUID.fromString(resultSet.getString("user_id")));
+          user.setId(UUID.fromString(resultSet.getString("admin_id")));
           user.setUsername(resultSet.getString("username"));
           user.setFull_name(resultSet.getString("full_name"));
           user.setEmail(resultSet.getString("email"));
           user.setPassword(resultSet.getString("password"));
-          user.setPhone(resultSet.getString("phone"));
-          user.setAddress(resultSet.getString("address"));
-          user.setIs_admin(false);
+          user.setIs_admin(true);
         }
       }
     } catch (SQLException ex) {
@@ -145,7 +144,7 @@ public class UserRepository {
       return user;
     }
   }
-
+  
   public User find(Connection db, String key, String value) {
     User user = null;
     String query = SELECT_ONE_CUSTOM_SQL.replace("$1", key);
@@ -156,14 +155,12 @@ public class UserRepository {
       try (ResultSet resultSet = statement.executeQuery()) {
         if (resultSet.next()) {
           user = new User();
-          user.setId(UUID.fromString(resultSet.getString("user_id")));
+          user.setId(UUID.fromString(resultSet.getString("admin_id")));
           user.setUsername(resultSet.getString("username"));
           user.setFull_name(resultSet.getString("full_name"));
           user.setEmail(resultSet.getString("email"));
           user.setPassword(resultSet.getString("password"));
-          user.setPhone(resultSet.getString("phone"));
-          user.setAddress(resultSet.getString("address"));
-          user.setIs_admin(false);
+          user.setIs_admin(true);
         }
       }
     } catch (SQLException ex) {

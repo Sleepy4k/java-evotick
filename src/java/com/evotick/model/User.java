@@ -29,15 +29,12 @@ public class User implements Serializable {
   private String address;
 
   private boolean is_admin;
-  
-  private Timestamp created_at;
 
-  private Timestamp update_at;
-
-  public User() {}
+  public User() {
+  }
 
   public User(String username, String password) {
-    this.id = UUID.fromString(email);
+    this.id = UUID.randomUUID();
     this.username = username;
     this.password = password;
   }
@@ -48,9 +45,9 @@ public class User implements Serializable {
     this.email = email;
     this.password = password;
   }
-  
+
   public User(String username, String full_name, String email, String password, String phone, String address) {
-    this.id = UUID.fromString(email);
+    this.id = UUID.randomUUID();
     this.username = username;
     this.full_name = full_name;
     this.email = email;
@@ -133,19 +130,16 @@ public class User implements Serializable {
     this.is_admin = is_admin;
   }
 
-  public Timestamp getCreated_at() {
-    return created_at;
-  }
-
-  public void setCreated_at(Timestamp created_at) {
-    this.created_at = created_at;
-  }
-
-  public Timestamp getUpdate_at() {
-    return update_at;
-  }
-
-  public void setUpdate_at(Timestamp update_at) {
-    this.update_at = update_at;
+  @Override
+  public String toString() {
+    return "User{"
+      + "id=" + id
+      + ", username='" + username + '\''
+      + ", full_name='" + full_name + '\''
+      + ", email='" + email + '\''
+      + ", phone='" + phone + '\''
+      + ", address='" + address + '\''
+      + ", is_admin=" + is_admin
+      + '}';
   }
 }

@@ -5,8 +5,10 @@
 package com.evotick.service.impl;
 
 import com.evotick.model.User;
+import com.evotick.repository.AdminRepository;
 import com.evotick.repository.UserRepository;
 import com.evotick.service.LoginService;
+import com.evotick.helper.Hash;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,6 +53,9 @@ public class LoginServiceImpl implements LoginService {
     Connection db = (Connection) request.getServletContext().getAttribute("db");
 
     User user = new UserRepository().find(db, "email", email);
+    if (user == null) {
+      user = new AdminRepository().find(db, "email", email);
+    }
 
     if (user == null) {
       errors.put("email", "Email is not found in our database");
@@ -59,6 +64,16 @@ public class LoginServiceImpl implements LoginService {
       rds.forward(request, response);
       return;
     }
+
+    if (Hash.verify(password, user.getPassword())) {
+      errors.put("password", "Password is not valid, please try again");
+      request.setAttribute("errors", errors);
+      RequestDispatcher rds = request.getRequestDispatcher("WEB-INF/page/login.jsp");
+      rds.forward(request, response);
+      return;
+    }
+
+    request.getServletContext().setAttribute("user", user);
 
     response.sendRedirect(request.getContextPath() + "/dashboard");
   }
