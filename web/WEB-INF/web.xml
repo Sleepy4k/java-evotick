@@ -4,6 +4,14 @@
         <servlet-name>DashboardController</servlet-name>
         <servlet-class>com.evotick.controller.DashboardController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>com.evotick.controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentController</servlet-name>
+        <servlet-class>com.evotick.controller.user.PaymentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -12,6 +20,14 @@
         <servlet-name>DashboardController</servlet-name>
         <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentController</servlet-name>
+        <url-pattern>/user/payment</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
@@ -19,6 +35,39 @@
         <filter-name>SecurityProvider</filter-name>
         <filter-class>com.evotick.provider.SecurityProvider</filter-class>
     </filter>
+    <filter>
+        <filter-name>UserProvider</filter-name>
+        <filter-class>com.evotick.provider.UserProvider</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AuthProvider</filter-name>
+        <filter-class>com.evotick.provider.AuthProvider</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AdminProvider</filter-name>
+        <filter-class>com.evotick.provider.AdminProvider</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminProvider</filter-name>
+        <url-pattern>/admin*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthProvider</filter-name>
+        <servlet-name>DashboardController</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserProvider</filter-name>
+        <url-pattern>/user*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>SecurityProvider</filter-name>
         <url-pattern>/*</url-pattern>

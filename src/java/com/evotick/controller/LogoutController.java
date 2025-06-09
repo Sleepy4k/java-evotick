@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.evotick.controller;
-  
-import com.evotick.service.RegisterService;
-import com.evotick.service.impl.RegisterServiceImpl;
+
+import com.evotick.service.LogoutService;
+import com.evotick.service.impl.LogoutServiceImpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -16,25 +16,12 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Pandu
  */
-public class RegisterController extends HttpServlet {
+public class LogoutController extends HttpServlet {
 
-  RegisterService service = null;
+  LogoutService service = null;
 
-  public RegisterController() {
-    service = new RegisterServiceImpl();
-  }
-
-  /**
-   * Handles the HTTP <code>GET</code> method.
-   *
-   * @param request servlet request
-   * @param response servlet response
-   * @throws ServletException if a servlet-specific error occurs
-   * @throws IOException if an I/O error occurs
-   */
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    service.showForm(request, response);
+  public LogoutController() {
+    service = new LogoutServiceImpl();
   }
 
   /**
@@ -47,6 +34,6 @@ public class RegisterController extends HttpServlet {
    */
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    service.handleRegister(request, response);
+    service.handleLogout(request, response);
   }
 }

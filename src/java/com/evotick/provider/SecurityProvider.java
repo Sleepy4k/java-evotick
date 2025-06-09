@@ -44,13 +44,13 @@ public class SecurityProvider implements Filter {
       "accelerometer=(self), attribution-reporting=*, autoplay=(), bluetooth=(), browsing-topics=*, camera=(), compute-pressure=(self), cross-origin-isolated=(self), display-capture=(self), encrypted-media=(self), fullscreen=(self), gamepad=(self), geolocation=(self), gyroscope=(self), hid=(self), identity-credentials-get=(self), idle-detection=(self), local-fonts=(self), magnetometer=(self), microphone=(), midi=(self), otp-credentials=(), payment=(), picture-in-picture=*, publickey-credentials-create=(self), publickey-credentials-get=(self), screen-wake-lock=(self), serial=(self), storage-access=*, usb=(), web-share=(self), window-management=(self), vibrate=(), xr-spatial-tracking=(self)"
     );
 
-    String cspNonce = (String) request.getServletContext().getAttribute("cspNonce");
-    request.setAttribute("cspNonce", cspNonce);
-
-    res.setHeader(
-      "Content-Security-Policy",
-      String.format("default-src 'none';base-uri 'none';manifest-src 'self';form-action 'self';img-src 'self' https://*.googleapis.com https://*.gstatic.com https://assets.loket.com *.google.com *.googleusercontent.com i.ytimg.com data:;media-src 'self';object-src 'none';font-src 'self' https://fonts.gstatic.com data:;frame-src 'self' *.google.com *.youtube.com *.youtube-nocookie.com;block-all-mixed-content;connect-src 'self' https://*.googleapis.com *.google.com https://*.gstatic.com cdn.plyr.io noembed.com data: blob:;script-src 'self' 'strict-dynamic' 'nonce-%s';style-src 'self' 'strict-dynamic' 'nonce-%s' fonts.googleapis.com www.google.com cdn.plyr.io;upgrade-insecure-requests;frame-ancestors 'self';script-src-attr 'none'", cspNonce, cspNonce)
-    );
+//    String cspNonce = (String) request.getServletContext().getAttribute("cspNonce");
+//    request.setAttribute("cspNonce", cspNonce);
+//
+//    res.setHeader(
+//      "Content-Security-Policy",
+//      String.format("default-src 'none';base-uri 'none';manifest-src 'self';form-action 'self';img-src 'self' https://*.googleapis.com https://*.gstatic.com https://assets.loket.com *.google.com *.googleusercontent.com i.ytimg.com data:;media-src 'self';object-src 'none';font-src 'self' https://fonts.gstatic.com data:;frame-src 'self' *.google.com *.youtube.com *.youtube-nocookie.com;block-all-mixed-content;connect-src 'self' https://*.googleapis.com *.google.com https://*.gstatic.com cdn.plyr.io noembed.com data: blob:;script-src 'self' 'unsafe-inline';style-src 'self' 'unsafe-inline' fonts.googleapis.com www.google.com cdn.plyr.io;upgrade-insecure-requests;frame-ancestors 'self';script-src-attr 'none'", cspNonce, cspNonce)
+//    );
 
     chain.doFilter(request, res);
   }

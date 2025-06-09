@@ -13,9 +13,7 @@ import java.io.IOException;
  *
  * @author Pandu
  */
-public interface RegisterService {
+public interface LogoutService {
 
-  public void showForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
-
-  public void handleRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+  public void handleLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 }

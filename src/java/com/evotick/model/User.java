@@ -5,7 +5,6 @@
 package com.evotick.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.UUID;
 
 /**

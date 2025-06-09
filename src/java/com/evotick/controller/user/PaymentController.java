@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.evotick.controller;
-  
-import com.evotick.service.RegisterService;
-import com.evotick.service.impl.RegisterServiceImpl;
+
+package com.evotick.controller.user;
+
+import com.evotick.service.user.PaymentService;
+import com.evotick.service.user.impl.PaymentServiceImpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -16,12 +17,13 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Pandu
  */
-public class RegisterController extends HttpServlet {
+public class PaymentController extends HttpServlet {
 
-  RegisterService service = null;
 
-  public RegisterController() {
-    service = new RegisterServiceImpl();
+  PaymentService service = null;
+
+  public PaymentController() {
+    service = new PaymentServiceImpl();
   }
 
   /**
@@ -47,6 +49,6 @@ public class RegisterController extends HttpServlet {
    */
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    service.handleRegister(request, response);
+    service.handlePayment(request, response);
   }
 }

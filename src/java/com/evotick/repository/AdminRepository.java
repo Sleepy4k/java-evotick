@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -42,9 +41,6 @@ public class AdminRepository {
       statement.setString(3, user.getFull_name());
       statement.setString(4, user.getEmail());
       statement.setString(5, user.getPassword());
-      statement.setString(6, user.getPhone());
-      statement.setString(7, user.getAddress());
-      statement.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
 
       statement.executeUpdate();
     } catch (SQLException ex) {
@@ -59,10 +55,7 @@ public class AdminRepository {
       statement.setString(2, user.getFull_name());
       statement.setString(3, user.getEmail());
       statement.setString(4, user.getPassword());
-      statement.setString(5, user.getPhone());
-      statement.setString(6, user.getAddress());
-      statement.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
-      statement.setString(8, user.getId().toString());
+      statement.setString(5, user.getId().toString());
 
       statement.executeUpdate();
     } catch (SQLException ex) {

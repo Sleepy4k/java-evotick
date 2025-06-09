@@ -31,7 +31,7 @@ public class RegisterServiceImpl implements RegisterService {
   }
 
   @Override
-  public void handleLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  public void handleRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String username = request.getParameter("username");
     String full_name = request.getParameter("full_name");
     String email = request.getParameter("email");
