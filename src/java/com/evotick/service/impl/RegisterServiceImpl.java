@@ -35,12 +35,13 @@ public class RegisterServiceImpl implements RegisterService {
     String username = request.getParameter("username");
     String full_name = request.getParameter("full_name");
     String email = request.getParameter("email");
-    String password = request.getParameter("password");
     String phone = request.getParameter("phone");
-    String addresss = request.getParameter("addresss");
+    String address = request.getParameter("address");
+    String password = request.getParameter("password");
+    String password_confirmation = request.getParameter("password_confirmation");
     Map<String, String> errors = new HashMap<>();
 
-    if (username.isEmpty() || full_name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+    if (username.isEmpty() || full_name.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || password.isEmpty() || password_confirmation.isEmpty()) {
       if (username.isEmpty() || username.length() >= 50) {
         errors.put("username", "Username is required and must less than 50 character");
       }
@@ -50,8 +51,17 @@ public class RegisterServiceImpl implements RegisterService {
       if (email.isEmpty() || email.length() >= 50) {
         errors.put("email", "Email is required and must less than 50 character");
       }
+      if (phone.isEmpty() || phone.length() >= 50) {
+        errors.put("phone", "Phone is required and must less than 50 character");
+      }
+      if (address.isEmpty() || address.length() >= 255) {
+        errors.put("addresss", "Address is required and must less than 50 character");
+      }
       if (password.isEmpty() || password.length() >= 150) {
         errors.put("password", "Password is required and must less than 150 character");
+      }
+      if (password_confirmation.isEmpty() || password_confirmation.length() >= 150 || !password.equals(password_confirmation)) {
+        errors.put("password", "Password COnfirmation is required and must less than 150 character");
       }
 
       request.setAttribute("errors", errors);
@@ -59,9 +69,6 @@ public class RegisterServiceImpl implements RegisterService {
       rds.forward(request, response);
       return;
     }
-    
-    if (phone == null || phone.isEmpty()) phone = "xxxxxxxxxxxx";
-    if (addresss == null || addresss.isEmpty()) addresss = "Jl. Panjaitan";
 
     Connection db = (Connection) request.getServletContext().getAttribute("db");
 
@@ -82,7 +89,7 @@ public class RegisterServiceImpl implements RegisterService {
     user.setEmail(email);
     user.setPassword(Hash.hashPassword(password));
     user.setPhone(phone);
-    user.setAddress(addresss);
+    user.setAddress(address);
     new UserRepository().insert(db, user);
 
     response.sendRedirect(request.getContextPath() + "/login");

@@ -65,7 +65,7 @@ public class LoginServiceImpl implements LoginService {
       return;
     }
 
-    if (Hash.verify(password, user.getPassword())) {
+    if (!Hash.verify(password, user.getPassword())) {
       errors.put("password", "Password is not valid, please try again");
       request.setAttribute("errors", errors);
       RequestDispatcher rds = request.getRequestDispatcher("WEB-INF/page/login.jsp");
@@ -75,7 +75,7 @@ public class LoginServiceImpl implements LoginService {
 
     request.getServletContext().setAttribute("user", user);
 
-    String path = user.getIs_admin() ? "/dashboard" : "";
+    String path = user.getIs_admin() ? "/admin/dashboard" : "";
     
     response.sendRedirect(request.getContextPath() + path);
   }

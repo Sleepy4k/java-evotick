@@ -4,6 +4,7 @@
  */
 package com.evotick.provider;
 
+import com.evotick.model.User;
 import java.io.IOException;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -11,15 +12,16 @@ import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
  * @author Pandu
  */
-public class SecurityProvider implements Filter {
+public class GuestProvider implements Filter {
 
-  public SecurityProvider() {
+  public GuestProvider() {
   }
 
   /**
@@ -32,19 +34,20 @@ public class SecurityProvider implements Filter {
    * @exception ServletException if a servlet error occurs
    */
   @Override
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+  public void doFilter(ServletRequest request, ServletResponse response,
+    FilterChain chain)
+    throws IOException, ServletException {
+    User user = (User) request.getServletContext().getAttribute("user");
+
+    HttpServletRequest req = (HttpServletRequest) request;
     HttpServletResponse res = (HttpServletResponse) response;
 
-    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-    res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-    res.setDateHeader("Expires", 0); // Proxies.
+    if (user != null) {
+      res.sendRedirect(req.getContextPath());
+      return;
+    }
 
-    res.setHeader(
-      "Permission-Policy",
-      "accelerometer=(self), attribution-reporting=*, autoplay=(), bluetooth=(), browsing-topics=*, camera=(), compute-pressure=(self), cross-origin-isolated=(self), display-capture=(self), encrypted-media=(self), fullscreen=(self), gamepad=(self), geolocation=(self), gyroscope=(self), hid=(self), identity-credentials-get=(self), idle-detection=(self), local-fonts=(self), magnetometer=(self), microphone=(), midi=(self), otp-credentials=(), payment=(), picture-in-picture=*, publickey-credentials-create=(self), publickey-credentials-get=(self), screen-wake-lock=(self), serial=(self), storage-access=*, usb=(), web-share=(self), window-management=(self), vibrate=(), xr-spatial-tracking=(self)"
-    );
-
-    chain.doFilter(request, res);
+    chain.doFilter(req, res);
   }
 
   /**
@@ -62,5 +65,4 @@ public class SecurityProvider implements Filter {
   @Override
   public void init(FilterConfig filterConfig) {
   }
-
 }

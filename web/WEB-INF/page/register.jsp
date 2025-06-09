@@ -10,7 +10,7 @@
 <html>
     <head>
         <jsp:include page="../component/meta.jsp" />
-        <title>Register | ${appName}</title>
+        <title>Daftar | ${appName}</title>
         <jsp:include page="../component/header/landing.jsp" />
     </head>
     <body class="index-page">
@@ -28,7 +28,7 @@
                     <form method="POST" action="${baseUrl}/register">
                         <div class="mb-3">
                             <label for="username" class="form-label visually-hidden">Username</label>
-                            <input type="text" name="username" id="username" class="form-control" placeholder="Your Username*" required />
+                            <input type="text" name="username" id="username" class="form-control" placeholder="Username" required />
                             <c:if test="${errors.username != null}">
                                 <div class="mt-2">
                                     ${errors.username}
@@ -38,7 +38,7 @@
 
                         <div class="mb-3">
                             <label for="full_name" class="form-label visually-hidden">Nama Lengkap</label>
-                            <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Your Full Name*" required />
+                            <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Nama Lengkap" required />
                             <c:if test="${errors.full_name != null}">
                                 <div class="mt-2">
                                     ${errors.full_name}
@@ -48,7 +48,7 @@
 
                         <div class="mb-3">
                             <label for="email" class="form-label visually-hidden">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Your Email*" required />
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Email" required />
                             <c:if test="${errors.email != null}">
                                 <div class="mt-2">
                                     ${errors.email}
@@ -57,18 +57,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="password" class="form-label visually-hidden">Password</label>
-                            <input type="password" name="password" id="password" class="form-control" placeholder="Your Password*" required />
-                            <c:if test="${errors.password != null}">
-                                <div class="mt-2">
-                                    ${errors.password}
-                                </div>
-                            </c:if>
-                        </div>
-
-                        <div class="mb-3">
                             <label for="phone" class="form-label visually-hidden">Phone Number</label>
-                            <input type="text" name="phone" id="phone" class="form-control" placeholder="Your Phone Number" />
+                            <input type="text" name="phone" id="phone" class="form-control" placeholder="Nomor Handphone" />
                             <c:if test="${errors.phone != null}">
                                 <div class="mt-2">
                                     ${errors.phone}
@@ -78,10 +68,30 @@
 
                         <div class="mb-3">
                             <label for="address" class="form-label visually-hidden">Address</label>
-                            <input type="text" name="address" id="address" class="form-control" placeholder="Your Address" />
+                            <input type="text" name="address" id="address" class="form-control" placeholder="Alamat" />
                             <c:if test="${errors.address != null}">
                                 <div class="mt-2">
                                     ${errors.address}
+                                </div>
+                            </c:if>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label visually-hidden">Password</label>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Kata Sandi" required />
+                            <c:if test="${errors.password != null}">
+                                <div class="mt-2">
+                                    ${errors.password}
+                                </div>
+                            </c:if>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label visually-hidden">Password Confirmation</label>
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Konfirmasi Kata Sandi" required />
+                            <c:if test="${errors.password_confirmation != null}">
+                                <div class="mt-2">
+                                    ${errors.password_confirmation}
                                 </div>
                             </c:if>
                         </div>

@@ -14,23 +14,22 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="${baseUrl}" class="active">Home</a></li>
-                <li><a href="${baseUrl}/event">Event</a></li>
+                <li><a href="${baseUrl}" class="active">Beranda</a></li>
+                <li><a href="${baseUrl}/event">Acara</a></li>
 
                 <li class="dropdown">
                     <a href="#">
-                        <span>Type Event</span>
+                        <span>Kategori</span>
                         <i class="bi bi-chevron-down dropdown-indicator"></i>
                     </a>
                     <ul>
-                        <li><a href="${baseUrl}/user/concert">Concert</a></li>
+                        <li><a href="${baseUrl}/user/concert">Konser</a></li>
                         <li><a href="${baseUrl}/user/seminar">Seminar</a></li>
-                        <li><a href="${baseUrl}/user/sport">Sport</a></li>
+                        <li><a href="${baseUrl}/user/sport">Olahraga</a></li>
                     </ul>
                 </li>
 
                 <c:if test="${user != null}">
-                    <li><a href="${baseUrl}/user/payment">Pembayaran</a></li>
                     <li><a href="${baseUrl}/user/history">Riwayat Pembelian</a></li>
                     <li><a href="${baseUrl}/user/ticket">Tiket Saya</a></li>
                 </c:if>
@@ -38,12 +37,12 @@
                 <c:if test="${user == null}">
                     <li class="dropdown">
                         <a href="#">
-                            <span>Account</span>
+                            <span>Akun</span>
                             <i class="bi bi-chevron-down dropdown-indicator"></i>
                         </a>
                         <ul>
-                            <li><a href="${baseUrl}/login">Login</a></li>
-                            <li><a href="${baseUrl}/register">Register</a></li>
+                            <li><a href="${baseUrl}/login">Masuk</a></li>
+                            <li><a href="${baseUrl}/register">Daftar</a></li>
                         </ul>
                     </li>
                 </c:if>

@@ -13,17 +13,14 @@ import org.mindrot.jbcrypt.BCrypt;
 public class Hash {
 
   public static String hashPassword(String password) {
-    int logRounds = 12;
-    String salt = BCrypt.gensalt(logRounds);
+    String salt = BCrypt.gensalt(12);
 
     return BCrypt.hashpw(password, salt);
   }
 
   public static boolean verify(String password, String hash) {
     if (password.isEmpty() || hash.isEmpty()) return false;
-    
-    String hashed = hashPassword(password);
 
-    return hash.equals(hashed);
+    return BCrypt.checkpw(password, hash);
   }
 }
