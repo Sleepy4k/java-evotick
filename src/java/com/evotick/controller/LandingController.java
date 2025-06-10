@@ -6,7 +6,6 @@ package com.evotick.controller;
 
 import com.evotick.service.LandingService;
 import com.evotick.service.impl.LandingServiceImpl;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

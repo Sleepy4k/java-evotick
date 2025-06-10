@@ -4,6 +4,7 @@
     Author     : LENOVO
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -246,7 +247,7 @@
                             <div class="card bg-primary text-white">
                                 <div class="card-body">
                                     <h5 class="card-title">Total Acara</h5>
-                                    <h2 class="mb-0">24</h2>
+                                    <h2 class="mb-0">${totalEvent}</h2>
                                 </div>
                             </div>
                         </div>
@@ -254,7 +255,7 @@
                             <div class="card bg-success text-white">
                                 <div class="card-body">
                                     <h5 class="card-title">Acara Aktif</h5>
-                                    <h2 class="mb-0">18</h2>
+                                    <h2 class="mb-0">${totalEventOnGoing}</h2>
                                 </div>
                             </div>
                         </div>
@@ -262,7 +263,7 @@
                             <div class="card bg-warning text-white">
                                 <div class="card-body">
                                     <h5 class="card-title">Acara yang akan datang</h5>
-                                    <h2 class="mb-0">5</h2>
+                                    <h2 class="mb-0">${totalEventFinished}</h2>
                                 </div>
                             </div>
                         </div>
@@ -270,7 +271,7 @@
                             <div class="card bg-danger text-white">
                                 <div class="card-body">
                                     <h5 class="card-title">Habis Terjual</h5>
-                                    <h2 class="mb-0">1</h2>
+                                    <h2 class="mb-0">${totalTicket}</h2>
                                 </div>
                             </div>
                         </div>
@@ -289,178 +290,31 @@
                                     <th>Tanggal</th>
                                     <th>Lokasi</th>
                                     <th>Tipe</th>
-                                    <th>Tiket</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>New Year Music Festival</td>
-                                    <td>01 Jan 2025</td>
-                                    <td>Jakarta</td>
-                                    <td><span class="badge bg-primary"></span></td>
-                                    <td>
-                                        <div class="progress" style="height: 6px">
-                                            <div
-                                                class="progress-bar bg-primary"
-                                                role="progressbar"
-                                                style="width: 45%"
-                                                aria-valuenow="45"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                ></div>
-                                        </div>
-                                        <small>450/1000</small>
-                                    </td>
-                                    <td><span class="badge bg-success">Aktif</span></td>
-                                    <td class="action-btns">
-                                        <button
-                                            class="btn btn-sm btn-outline-primary"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editEventModal"
-                                            >
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger delete-event">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Tech Conference</td>
-                                    <td>15 Jan 2025</td>
-                                    <td>Bandung</td>
-                                    <td><span class="badge bg-info">Seminar</span></td>
-                                    <td>
-                                        <div class="progress" style="height: 6px">
-                                            <div
-                                                class="progress-bar bg-info"
-                                                role="progressbar"
-                                                style="width: 24%"
-                                                aria-valuenow="24"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                ></div>
-                                        </div>
-                                        <small>120/500</small>
-                                    </td>
-                                    <td><span class="badge bg-success">Aktif</span></td>
-                                    <td class="action-btns">
-                                        <button
-                                            class="btn btn-sm btn-outline-primary"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editEventModal"
-                                            >
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger delete-event">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Women's Day Conference</td>
-                                    <td>08 Mar 2025</td>
-                                    <td>Surabaya</td>
-                                    <td><span class="badge bg-info">Seminar</span></td>
-                                    <td>
-                                        <div class="progress" style="height: 6px">
-                                            <div
-                                                class="progress-bar bg-success"
-                                                role="progressbar"
-                                                style="width: 100%"
-                                                aria-valuenow="100"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                ></div>
-                                        </div>
-                                        <small>800/800</small>
-                                    </td>
-                                    <td><span class="badge bg-danger">Habis Terjual</span></td>
-                                    <td class="action-btns">
-                                        <button
-                                            class="btn btn-sm btn-outline-primary"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editEventModal"
-                                            disabled
-                                            >
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger delete-event">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Jazz Night Live</td>
-                                    <td>21 Mar 2025</td>
-                                    <td>Jakarta</td>
-                                    <td><span class="badge bg-primary">Konser</span></td>
-                                    <td>
-                                        <div class="progress" style="height: 6px">
-                                            <div
-                                                class="progress-bar bg-primary"
-                                                role="progressbar"
-                                                style="width: 50%"
-                                                aria-valuenow="50"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                ></div>
-                                        </div>
-                                        <small>150/300</small>
-                                    </td>
-                                    <td><span class="badge bg-success">Aktif</span></td>
-                                    <td class="action-btns">
-                                        <button
-                                            class="btn btn-sm btn-outline-primary"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editEventModal"
-                                            >
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger delete-event">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>MotoGP Mandalika</td>
-                                    <td>03-05 Oct 2025</td>
-                                    <td>Lombok</td>
-                                    <td><span class="badge bg-warning">Olahraga</span></td>
-                                    <td>
-                                        <div class="progress" style="height: 6px">
-                                            <div
-                                                class="progress-bar bg-warning"
-                                                role="progressbar"
-                                                style="width: 64%"
-                                                aria-valuenow="64"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                ></div>
-                                        </div>
-                                        <small>3200/5000</small>
-                                    </td>
-                                    <td><span class="badge bg-success">Aktif</span></td>
-                                    <td class="action-btns">
-                                        <button
-                                            class="btn btn-sm btn-outline-primary"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editEventModal"
-                                            >
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger delete-event">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                <c:forEach var="event" items="${events}">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>${event.name}</td>
+                                        <td>${event.start_date}</td>
+                                        <td>${event.location}</td>
+                                        <td><span class="badge bg-primary">${event.type.title}</span></td>
+                                        <td>
+                                            <span class="badge bg-success">Aktif</span>
+                                        </td>
+                                        <td class="action-btns">
+                                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editEventModal">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger delete-event">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -491,40 +345,40 @@
                     <div class="modal-body">
                         <form id="addEventForm">
                             <div class="mb-3">
-                                <label for="eventName" class="form-label">Nama Acara</label>
+                                <label for="name" class="form-label">Nama Acara</label>
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="eventName"
+                                    id="name"
                                     required
                                     />
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="eventDate" class="form-label">Tanggal</label>
+                                    <label for="start_date" class="form-label">Tanggal Mulai</label>
                                     <input
                                         type="date"
                                         class="form-control"
-                                        id="eventDate"
+                                        id="start_date"
                                         required
                                         />
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="eventType" class="form-label">Tipe</label>
-                                    <select class="form-select" id="eventType" required>
-                                        <option value="concert">Konser</option>
-                                        <option value="seminar">Seminar</option>
-                                        <option value="sport">Olahraga</option>
-                                        <option value="exhibition">Pameran</option>
-                                    </select>
+                                    <label for="end_date" class="form-label">Tanggal Selesai</label>
+                                    <input
+                                        type="date"
+                                        class="form-control"
+                                        id="end_date"
+                                        required
+                                        />
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="eventLocation" class="form-label">Lokasi</label>
+                                <label for="location" class="form-label">Lokasi</label>
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="eventLocation"
+                                    id="location"
                                     required
                                     />
                             </div>
@@ -553,11 +407,11 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="eventStatus" class="form-label">Status</label>
-                                <select class="form-select" id="eventStatus" required>
-                                    <option value="active">Aktif</option>
-                                    <option value="inactive">Tidak aktif</option>
-                                    <option value="soldout">Habis Terjual</option>
+                                <label for="eventType" class="form-label">Tipe</label>
+                                <select class="form-select" id="eventType" required>
+                                    <option value="concert">Konser</option>
+                                    <option value="seminar">Seminar</option>
+                                    <option value="olahraga">Olahraga</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -571,8 +425,13 @@
                                     ></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="eventImage" class="form-label">Gambar Acara</label>
-                                <input type="file" class="form-control" id="eventImage" />
+                                <label for="poster_url" class="form-label">Gambar Acara</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="poster_url"
+                                    required
+                                    />
                             </div>
                         </form>
                     </div>

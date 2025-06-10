@@ -4,10 +4,22 @@
  */
 package com.evotick.service.admin;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
  *
  * @author LENOVO
  */
 public interface EventService {
-    
+
+  public void showPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+
+  public void handleCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+
+  public void handleEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+
+  public void handleDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 }
