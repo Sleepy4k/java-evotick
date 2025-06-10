@@ -28,6 +28,8 @@ public class Transaction implements Serializable {
 
   private EventPackage eventPackage;
 
+  private Ticket ticket;
+
   public Transaction() {
   }
 
@@ -87,4 +89,25 @@ public class Transaction implements Serializable {
     this.eventPackage = eventPackage;
   }
 
+  public Ticket getTicket() {
+    return ticket;
+  }
+
+  public void setTicket(Ticket ticket) {
+    this.ticket = ticket;
+  }
+
+  @Override
+  public String toString() {
+    return "Transaction{" +
+            "id=" + id +
+            ", event=" + event +
+            ", user=" + user +
+            ", purchased_at=" + purchased_at +
+            ", amount=" + amount +
+            ", status=" + status +
+            ", eventPackage=" + eventPackage +
+            ", ticket=" + ticket +
+            '}';
+  }
 }

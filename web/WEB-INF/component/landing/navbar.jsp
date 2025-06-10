@@ -31,7 +31,7 @@
 
                 <c:if test="${user != null}">
                     <li><a href="${baseUrl}/user/history">Riwayat Pembelian</a></li>
-                    <li><a href="${baseUrl}/user/ticket">Tiket Saya</a></li>
+                    <li><a href="${baseUrl}/ticket">Tiket Saya</a></li>
                 </c:if>
 
                 <c:if test="${user == null}">

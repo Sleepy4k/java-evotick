@@ -46,4 +46,8 @@ public class Ticket implements Serializable {
     this.unique_code = unique_code;
   }
 
+  @Override
+  public String toString() {
+    return "Ticket{" + "id=" + id + ", transaction=" + transaction + ", unique_code=" + unique_code + '}';
+  }
 }

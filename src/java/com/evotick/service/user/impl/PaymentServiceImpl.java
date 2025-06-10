@@ -118,8 +118,13 @@ public class PaymentServiceImpl implements PaymentService {
     long currentTime = System.currentTimeMillis();
     int randomNumber = new Random().nextInt(99999);
     
-    ticket.setUnique_code("EVTK-" + currentTime + "-" + randomNumber);
-    
+    String uniqueCode = "EVTK-" + currentTime + "-" + randomNumber;
+
+    if (uniqueCode.length() > 50) {
+      uniqueCode = uniqueCode.substring(0, 50);
+    }
+    ticket.setUnique_code(uniqueCode);
+
     new TicketRepository().insert(db, ticket);
 
     response.sendRedirect(request.getContextPath() + "/user/ticket");

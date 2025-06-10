@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row gy-4 mb-3">
                 <div class="col-lg-4 col-md-6 footer-about">
-                    <a href="index.html" class="logo d-flex align-items-center">
+                    <a href="${baseUrl}" class="logo d-flex align-items-center">
                         <span class="sitename">${appName}</span>
                     </a>
                     <div class="footer-contact pt-3">
@@ -29,18 +29,18 @@
                     <h4>Useful Links</h4>
                     <ul>
                         <li><a href="${baseUrl}">Home</a></li>
-                        <li><a href="${appName}/event">Event</a></li>
-                        <li><a href="${appName}/login">Login</a></li>
-                        <li><a href="${appName}/register">Register</a></li>
+                        <li><a href="${baseUrl}/event">Event</a></li>
+                        <li><a href="${baseUrl}/login">Login</a></li>
+                        <li><a href="${baseUrl}/register">Register</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-2 col-md-3 footer-links">
                     <h4>Our Event</h4>
                     <ul>
-                        <li><a href="${appName}/sport">Sport</a></li>
-                        <li><a href="${appName}/concert">Concert</a></li>
-                        <li><a href="${appName}/seminar">Seminar</a></li>
+                        <li><a href="${baseUrl}/sport">Sport</a></li>
+                        <li><a href="${baseUrl}/concert">Concert</a></li>
+                        <li><a href="${baseUrl}/seminar">Seminar</a></li>
                     </ul>
                 </div>
             </div>

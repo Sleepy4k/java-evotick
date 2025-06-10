@@ -5,10 +5,15 @@
 package com.evotick.repository;
 
 import com.evotick.model.Ticket;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -109,5 +114,31 @@ public class TicketRepository extends BaseRepository<Ticket> {
     ticket.setUnique_code(resultSet.getString("unique_code"));
 
     return ticket;
+  }
+
+  public List<Ticket> getUserTicket(Connection db, String key, String value) {
+    List<Ticket> models = new ArrayList<>();
+    // Use the custom SQL to fetch tickets based on a specific key-value pair
+    // so we get all transactions for a user and then get the tickets
+    String sql = "select tickets.ticket_id, tickets.transaction_id, tickets.unique_code, "
+      + "transactions.transaction_id as transaction_transaction_id, transactions.event_id as transaction_event_id, transactions.user_id as transaction_user_id, "
+      + "transactions.purchased_at as transaction_purchased_at, transactions.amount as transaction_amount, transactions.status_id as transaction_status_id, transactions.package_id as transaction_package_id, "
+      + "users.user_id as user_user_id, users.username as user_username, users.full_name as user_full_name, users.email as user_email "
+      + "from tickets "
+      + "join transactions on tickets.transaction_id = transactions.transaction_id "
+      + "join users on transactions.user_id = users.user_id where " + key + " = ?";
+
+    try (PreparedStatement statement = db.prepareStatement(sql)) {
+      statement.setObject(1, value);
+      try (ResultSet resultSet = statement.executeQuery()) {
+        while (resultSet.next()) {
+          Ticket ticket = mapResultSetToModel(resultSet);
+          models.add(ticket);
+        }
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(TicketRepository.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return models;
   }
 }

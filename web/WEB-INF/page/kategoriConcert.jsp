@@ -10,7 +10,7 @@
 <html>
     <head>
         <jsp:include page="../component/meta.jsp" />
-        <title>Detail Acara | ${appName}</title>
+        <title>Konser | ${appName}</title>
         <jsp:include page="../component/header/landing.jsp" />
     </head>
     <body class="index-page">
