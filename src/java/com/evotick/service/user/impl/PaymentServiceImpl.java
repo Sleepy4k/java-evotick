@@ -6,10 +6,15 @@ package com.evotick.service.user.impl;
 
 import com.evotick.model.Event;
 import com.evotick.model.EventPackage;
+import com.evotick.model.Ticket;
+import com.evotick.model.Transaction;
+import com.evotick.model.TransactionStatus;
 import com.evotick.model.User;
 import com.evotick.repository.EventPackageRepository;
 import com.evotick.repository.EventRepository;
-import com.evotick.repository.UserRepository;
+import com.evotick.repository.TicketRepository;
+import com.evotick.repository.TransactionRepository;
+import com.evotick.repository.TransactionStatusRepository;
 import com.evotick.service.user.PaymentService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -19,6 +24,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -36,10 +42,10 @@ public class PaymentServiceImpl implements PaymentService {
 
     Event event = new EventRepository().find(db, UUID.fromString(id));
     EventPackage data = new EventPackageRepository().find(db, UUID.fromString(packageId));
-    
+
     request.setAttribute("event", event);
     request.setAttribute("data", data);
-    
+
     System.out.println(data);
 
     RequestDispatcher rds = request.getRequestDispatcher("/WEB-INF/page/userPayment.jsp");
@@ -55,7 +61,7 @@ public class PaymentServiceImpl implements PaymentService {
     String rekening = request.getParameter("rekening");
     String cvv = request.getParameter("cvv");
     Map<String, String> errors = new HashMap<>();
-    
+
     if (eventId.isEmpty() || packageId.isEmpty() || ticketCount.isEmpty() || purchaseDate.isEmpty() || rekening.isEmpty() || cvv.isEmpty()) {
       if (eventId.isEmpty() || eventId.length() >= 50) {
         errors.put("eventId", "eventId is required and must less than 50 character");
@@ -84,8 +90,39 @@ public class PaymentServiceImpl implements PaymentService {
 
     Connection db = (Connection) request.getServletContext().getAttribute("db");
 
-    User user = new UserRepository().find(db, "email", email);
+    User user = (User) request.getServletContext().getAttribute("user");
+    TransactionStatus status = new TransactionStatusRepository().find(db, "name", "paid");
 
+    Transaction transaction = new Transaction();
+    transaction.setId(UUID.randomUUID());
+    transaction.setEvent(new EventRepository().find(db, UUID.fromString(eventId)));
+    transaction.setUser(user);
+    String formattedPurchaseDate = purchaseDate;
+    if (purchaseDate.length() == 10) {
+      formattedPurchaseDate = purchaseDate + " 00:00:00";
+    }
+    transaction.setPurchased_at(java.sql.Timestamp.valueOf(formattedPurchaseDate));
+    transaction.setAmount(Integer.parseInt(ticketCount));
+    transaction.setStatus(status);
+    if (!packageId.isEmpty()) {
+      EventPackage eventPackage = new EventPackageRepository().find(db, UUID.fromString(packageId));
+      transaction.setEventPackage(eventPackage);
+    }
+
+    new TransactionRepository().insert(db, transaction);
+    
+    Ticket ticket = new Ticket();
+    ticket.setId(UUID.randomUUID());
+    ticket.setTransaction(transaction);
+    
+    long currentTime = System.currentTimeMillis();
+    int randomNumber = new Random().nextInt(99999);
+    
+    ticket.setUnique_code("EVTK-" + currentTime + "-" + randomNumber);
+    
+    new TicketRepository().insert(db, ticket);
+
+    response.sendRedirect(request.getContextPath() + "/user/ticket");
   }
-  
+
 }

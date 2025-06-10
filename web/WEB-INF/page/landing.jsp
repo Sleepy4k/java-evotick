@@ -4,6 +4,7 @@
     Author     : Pandu
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,6 +12,16 @@
         <jsp:include page="../component/meta.jsp" />
         <title>${appName}</title>
         <jsp:include page="../component/header/landing.jsp" />
+
+
+        <style>
+            .lihat-lainnya-btn {
+                position: absolute;
+                right: 30px;
+                bottom: 20px;
+                z-index: 10;
+            }
+        </style>
     </head>
     <body class="index-page">
         <jsp:include page="../component/landing/navbar.jsp" />
@@ -31,76 +42,25 @@
                     <div class="container position-relative" data-aos="fade-up">
                         <div class="row">
                             <div class="col-lg-6">
-                                <h2>About The Event</h2>
-                                <p>Sed nam ut dolor qui repellendus iusto odit. Possimus inventore eveniet accusamus error amet eius aut
-                                    accusantium et. Non odit consequatur repudiandae sequi ea odio molestiae. Enim possimus sunt inventore in
-                                    est ut optio sequi unde.</p>
+                                <h2>Tentang Acara</h2>
+                                <p>Konser Sheila On 7 jadi momen nostalgia penuh kenangan bagi para penggemar. Lewat lagu-lagu legendaris seperti Dan, Sephia, dan Melompat Lebih Tinggi, suasana konser terasa hangat, akrab, dan penuh semangat dari Sheila Gank yang tak pernah padam.</p>
                             </div>
                             <div class="col-lg-3">
-                                <h3>Where</h3>
-                                <p>Downtown Conference Center, New York</p>
+                                <h3>Lokasi</h3>
+                                <p>Gor Satria, Purwokerto</p>
                             </div>
                             <div class="col-lg-3">
-                                <h3>When</h3>
-                                <p>Monday to Wednesday<br>10-12 December</p>
+                                <h3>Waktu</h3>
+                                <p>Sabtu, 14 Juni 2025</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="speakers" class="speakers section">
-                <div class="container section-title" data-aos="fade-up">
-                    <h2>Type Event</h2>
-                </div>
-
-                <div class="container">
-                    <div class="row gy-4">
-                        <section id="type-event" class="py-5 bg-light">
-                            <div class="container text-center">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-4 mb-4">
-                                        <a href="Login.html">
-                                            <div class="card event-card shadow-sm">
-                                                <img src="${baseUrl}/assets/img/speakers/KONSER.png" class="card-img-top event-img" alt="Concert">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Concert</h5>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <div class="col-md-4 mb-4">
-                                        <a href="Login.html">
-                                            <div class="card event-card shadow-sm">
-                                                <img src="${baseUrl}/assets/img/speakers/sport.png" class="card-img-top event-img" alt="Sport">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Sport</h5>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <div class="col-md-4 mb-4">
-                                        <a href="Login.html">
-                                            <div class="card event-card shadow-sm">
-                                                <img src="${baseUrl}/assets/img/speakers/SEMINAR.png" class="card-img-top event-img" alt="Seminar">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Seminar</h5>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </section>
-
             <section id="schedule" class="schedule section">
                 <div class="container section-title" data-aos="fade-up">
-                    <h2>Schedule Event</h2>
+                    <h2>Jadwal Acara</h2>
                     <p>Berikut adalah jadwal event yang akan berlangsung setiap bulan</p>
                 </div>
 
@@ -157,27 +117,87 @@
                 </div>
             </section>
 
-            <section id="sport-event" class="section">
+            <section id="sport-event" class="section" style="position: relative;">
                 <div class="container section-title" data-aos="fade-up">
-                    <h2>Event Sport</h2>
+                    <h2>Acara Olahraga </h2>
                 </div>
 
-                <div class="container">
-                    <div class="row gy-4 align-items-center" data-aos="fade-up" data-aos-delay="100">
+                <!-- Event Sport -->
+                <c:forEach var="sport" items="${sports}">
+                    <div class="row gy-4 align-items-center mb-5" data-aos="fade-up" data-aos-delay="100">
                         <div class="col-lg-6">
-                            <img src="https://assets.loket.com/neo/production/images/banner/m8IW7_1746684706944067.jpeg" class="img-fluid rounded" alt="MotoGP Mandalika">
+                            <img src="${sport.poster_url}" class="img-fluid rounded" alt="${sport.name}">
                         </div>
-
                         <div class="col-lg-6">
-                            <h3>Pertamina Grand Prix of Indonesia 2025</h3>
-                            <p><strong>Tanggal:</strong> 03 – 05 Oktober 2025</p>
-                            <p><strong>Waktu:</strong> 10:00 – 22:00 WIB</p>
-                            <p><strong>Lokasi:</strong> Sirkuit Internasional Pertamina Mandalika</p>
-                            <a href="Login.html" class="btn btn-primary bayar-btn mt-3" data-event="Pertamina Grand Prix of Indonesia 2025">Bayar Tiket</a>
+                            <h3>${sport.name}</h3>
+                            <p><strong>Tanggal:</strong> ${sport.start_date}</p>
+                            <p><strong>Lokasi:</strong> ${sport.location}</p>
+                            <a href="${baseUrl}/event/detail?id=${sport.id}" class="btn btn-primary bayar-btn mt-3" data-event="${sport.name}">Bayar Tiket</a>
                         </div>
                     </div>
-                </div>
+                </c:forEach>
+
+                <!-- Tombol Lihat Event Lainnya di kanan bawah -->
+                <a href="${baseUrl}/user/sport" class="btn btn-secondary lihat-lainnya-btn">
+                    Lihat Acara Lainnya
+                </a>
             </section>
+
+            <!-- Sport Section -->
+            <section id="sport-event" class="section" style="position: relative;">
+                <div class="container section-title" data-aos="fade-up">
+                    <h2>Acara Konser </h2>
+                </div>
+
+                <!-- Event Konser -->
+                <c:forEach var="concert" items="${concerts}">
+                    <div class="row gy-4 align-items-center mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="col-lg-6">
+                            <img src="${concert.poster_url}" class="img-fluid rounded" alt="${concert.name}">
+                        </div>
+                        <div class="col-lg-6">
+                            <h3>${concert.name}</h3>
+                            <p><strong>Tanggal:</strong> ${concert.start_date}</p>
+                            <p><strong>Lokasi:</strong> ${concert.location}</p>
+                            <a href="${baseUrl}/event/detail?id=${concert.id}" class="btn btn-primary bayar-btn mt-3" data-event="${concert.name}">Bayar Tiket</a>
+                        </div>
+                    </div>
+                </c:forEach>
+
+                <!-- Tombol Lihat Event Lainnya di kanan bawah -->
+                <a href="${baseUrl}/user/concert" class="btn btn-secondary lihat-lainnya-btn">
+                    Lihat Acara Lainnya
+                </a>
+            </section>
+
+            <!-- Sport Section -->
+            <section id="sport-event" class="section" style="position: relative;">
+                <div class="container section-title" data-aos="fade-up">
+                    <h2>Acara Seminar </h2>
+                </div>
+
+                <!-- Event Seminar -->
+                <!-- Event Konser -->
+                <c:forEach var="seminar" items="${seminars}">
+                    <div class="row gy-4 align-items-center mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="col-lg-6">
+                            <img src="${seminar.poster_url}" class="img-fluid rounded" alt="${seminar.name}">
+                        </div>
+                        <div class="col-lg-6">
+                            <h3>${seminar.name}</h3>
+                            <p><strong>Tanggal:</strong> ${seminar.start_date}</p>
+                            <p><strong>Lokasi:</strong> ${seminar.location}</p>
+                            <a href="${baseUrl}/event/detail?id=${seminar.id}" class="btn btn-primary bayar-btn mt-3" data-event="${seminar.name}">Bayar Tiket</a>
+                        </div>
+                    </div>
+                </c:forEach>
+
+                <!-- Tombol Lihat Event Lainnya di kanan bawah -->
+                <a href="${baseUrl}/user/seminar" class="btn btn-secondary lihat-lainnya-btn">
+                    Lihat Acara Lainnya
+                </a>
+            </section>
+
 
             <section id="sponsors" class="sponsors section light-background">
                 <div class="container section-title" data-aos="fade-up">
@@ -225,7 +245,7 @@
             <section id="contact" class="contact section">
                 <div class="container section-title" data-aos="fade-up">
                     <h2>Contact</h2>
-                    <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                    <p>Silahkan hubungi kami jika ingin mengetahui kami lebih dalam</p>
                 </div>
 
                 <div class="container" data-aos="fade-up" data-aos-delay="100">

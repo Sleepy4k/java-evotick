@@ -76,7 +76,7 @@ public class LoginServiceImpl implements LoginService {
     request.getServletContext().setAttribute("user", user);
 
     String path = user.getIs_admin() ? "/admin/dashboard" : "";
-    
+
     response.sendRedirect(request.getContextPath() + path);
   }
 }

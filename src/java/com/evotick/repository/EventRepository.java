@@ -9,11 +9,15 @@ import com.evotick.model.EventPackage;
 import com.evotick.model.EventStatus;
 import com.evotick.model.EventType;
 import com.evotick.model.User;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -171,5 +175,22 @@ public class EventRepository extends BaseRepository<Event> {
     event.setCreated_by(createdBy);
 
     return event;
+  }
+
+  public List<Event> findCustom(Connection db, String key, String value) {
+    List<Event> models = new ArrayList<>();
+    String query = getSelectOneCustomSql().replace("$1", key); // Placeholder for column name
+    try (PreparedStatement statement = db.prepareStatement(query)) {
+      statement.setString(1, value);
+      try (ResultSet resultSet = statement.executeQuery()) {
+        while (resultSet.next()) {
+          Event model = mapResultSetToModel(resultSet);
+          models.add(model);
+        }
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(BaseRepository.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return models;
   }
 }

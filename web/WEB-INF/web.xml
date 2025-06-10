@@ -20,6 +20,18 @@
         <servlet-name>EventDetailController</servlet-name>
         <servlet-class>com.evotick.controller.user.EventDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConcertController</servlet-name>
+        <servlet-class>com.evotick.controller.user.ConcertController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SeminarController</servlet-name>
+        <servlet-class>com.evotick.controller.user.SeminarController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SportController</servlet-name>
+        <servlet-class>com.evotick.controller.user.SportController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -43,6 +55,18 @@
     <servlet-mapping>
         <servlet-name>EventDetailController</servlet-name>
         <url-pattern>/event/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConcertController</servlet-name>
+        <url-pattern>/concert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SeminarController</servlet-name>
+        <url-pattern>/seminar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SportController</servlet-name>
+        <url-pattern>/sport</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
@@ -85,13 +109,16 @@
     <filter-mapping>
         <filter-name>AuthProvider</filter-name>
         <servlet-name>DashboardController</servlet-name>
+        <servlet-name>LogoutController</servlet-name>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>UserProvider</filter-name>
-        <url-pattern>/user/*</url-pattern>
+        <servlet-name>EventController</servlet-name>
+        <servlet-name>EventDetailController</servlet-name>
+        <servlet-name>PaymentController</servlet-name>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>

@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.evotick.controller;
 
-import com.evotick.service.LandingService;
-import com.evotick.service.impl.LandingServiceImpl;
-import jakarta.servlet.RequestDispatcher;
+package com.evotick.controller.user;
+
+import com.evotick.service.user.SportService;
+import com.evotick.service.user.impl.SportServiceImpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -17,12 +17,12 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Pandu
  */
-public class LandingController extends HttpServlet {
+public class SportController extends HttpServlet {
 
-  LandingService service = null;
+  SportService service = null;
 
-  public LandingController() {
-    service = new LandingServiceImpl();
+  public SportController() {
+    service = new SportServiceImpl();
   }
 
   /**

@@ -23,9 +23,9 @@
                         <i class="bi bi-chevron-down dropdown-indicator"></i>
                     </a>
                     <ul>
-                        <li><a href="${baseUrl}/user/concert">Konser</a></li>
-                        <li><a href="${baseUrl}/user/seminar">Seminar</a></li>
-                        <li><a href="${baseUrl}/user/sport">Olahraga</a></li>
+                        <li><a href="${baseUrl}/concert">Konser</a></li>
+                        <li><a href="${baseUrl}/seminar">Seminar</a></li>
+                        <li><a href="${baseUrl}/sport">Olahraga</a></li>
                     </ul>
                 </li>
 

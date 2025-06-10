@@ -5,10 +5,8 @@
 package com.evotick.service.user.impl;
 
 import com.evotick.model.Event;
-import com.evotick.model.EventPackage;
-import com.evotick.repository.EventPackageRepository;
 import com.evotick.repository.EventRepository;
-import com.evotick.service.user.EventDetailService;
+import com.evotick.service.user.ConcertService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,28 +14,23 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
  * @author Pandu
  */
-public class EventDetailServiceImpl implements EventDetailService {
+public class ConcertServiceImpl implements ConcertService {
 
   @Override
   public void showPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String id = request.getParameter("id");
-
     Connection db = (Connection) request.getServletContext().getAttribute("db");
 
-    Event event = new EventRepository().find(db, UUID.fromString(id));
-    List<EventPackage> packages = new EventPackageRepository().findCustom(db, "event_package.event_id", id);
-    
-    request.setAttribute("event", event);
-    request.setAttribute("packages", packages);
+    List<Event> concerts = new EventRepository().findCustom(db, "event_type.title", "concert");
 
-    RequestDispatcher rds = request.getRequestDispatcher("/WEB-INF/page/userDetailEvent.jsp");
+    request.setAttribute("concerts", concerts);
+
+    RequestDispatcher rds = request.getRequestDispatcher("WEB-INF/page/kategoriConcert.jsp");
     rds.forward(request, response);
   }
-  
+
 }
