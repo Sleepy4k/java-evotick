@@ -107,7 +107,7 @@
                                 <h5 class="mb-0">${ticket.transaction.event.name}</h5>
                                 <span class="badge badge-reguler">${ticket.transaction.eventPackage.name}</span>
                             </div>
-                            <p><strong>Nama:</strong> ${ticket.transaction.user.full_nama}</p>
+                            <p><strong>Nama:</strong> ${ticket.transaction.user.full_name}</p>
                             <p><strong>Tanggal:</strong> ${ticket.transaction.event.start_date}</p>
                             <p><strong>Lokasi:</strong> ${ticket.transaction.event.location}</p>
                             <p><strong>Jumlah Tiket:</strong> ${ticket.transaction.amount}</p>

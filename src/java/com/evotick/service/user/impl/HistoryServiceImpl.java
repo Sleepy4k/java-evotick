@@ -5,6 +5,7 @@
 package com.evotick.service.user.impl;
 
 import com.evotick.model.Transaction;
+import com.evotick.model.User;
 import com.evotick.repository.TransactionRepository;
 import com.evotick.service.user.HistoryService;
 import jakarta.servlet.RequestDispatcher;
@@ -25,7 +26,8 @@ public class HistoryServiceImpl implements HistoryService {
   public void showPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     Connection db = (Connection) request.getServletContext().getAttribute("db");
 
-    List<Transaction> histories = new TransactionRepository().select(db, 0, 100);
+    User user = (User) request.getServletContext().getAttribute("user");
+    List<Transaction> histories = new TransactionRepository().findCustom(db, "transactions.user_id", user.getId().toString());
     
     request.setAttribute("histories", histories);
 

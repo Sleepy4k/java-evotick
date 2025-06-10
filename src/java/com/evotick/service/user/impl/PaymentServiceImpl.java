@@ -46,8 +46,6 @@ public class PaymentServiceImpl implements PaymentService {
     request.setAttribute("event", event);
     request.setAttribute("data", data);
 
-    System.out.println(data);
-
     RequestDispatcher rds = request.getRequestDispatcher("/WEB-INF/page/userPayment.jsp");
     rds.forward(request, response);
   }
@@ -114,7 +112,7 @@ public class PaymentServiceImpl implements PaymentService {
     Ticket ticket = new Ticket();
     ticket.setId(UUID.randomUUID());
     ticket.setTransaction(transaction);
-    
+
     long currentTime = System.currentTimeMillis();
     int randomNumber = new Random().nextInt(99999);
     
@@ -127,7 +125,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     new TicketRepository().insert(db, ticket);
 
-    response.sendRedirect(request.getContextPath() + "/user/ticket");
+    response.sendRedirect(request.getContextPath() + "/ticket");
   }
 
 }

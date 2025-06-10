@@ -4,10 +4,8 @@
  */
 package com.evotick.service.user.impl;
 
-import com.evotick.model.Event;
 import com.evotick.model.Ticket;
 import com.evotick.model.User;
-import com.evotick.repository.EventRepository;
 import com.evotick.repository.TicketRepository;
 import com.evotick.service.user.TicketService;
 import jakarta.servlet.RequestDispatcher;
@@ -31,6 +29,7 @@ public class TicketServiceImpl implements TicketService {
     User user = (User) request.getServletContext().getAttribute("user");
     List<Ticket> tickets = new TicketRepository().getUserTicket(db, "users.user_id", user.getId().toString());
     
+      System.out.println(tickets.size());
     request.setAttribute("tickets", tickets);
 
     RequestDispatcher rds = request.getRequestDispatcher("WEB-INF/page/userTiket.jsp");

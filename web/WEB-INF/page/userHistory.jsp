@@ -42,8 +42,8 @@
                                 <td>${history.purchased_at}</td>
                                 <td>${history.amount}</td>
                                 <td>${history.event.type.title}</td>
-                                <td>${history.tiket.unique_code}</td>
-                                <td><span class="badge bg-success">${history.status.name}</span></td>
+                                <td>${history.ticket.unique_code}</td>
+                                <td><span class="badge bg-success">Paid</span></td>
                             </tr>
                         </c:forEach>
                     </tbody>
