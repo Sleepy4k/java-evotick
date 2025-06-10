@@ -123,6 +123,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`user_id`, `username`, `full_name`, `email`, `password`, `phone`, `address`) VALUES
 	('79b46458-a271-4486-9ca1-4c48aa86bdfc', 'sleepykz', 'Apri Pandu Wicaksono', 'pandu300478@gmail.com', '$2a$12$DJI7T4h1Z1KfsAl0vaYDSuEQ/yve7LdTqdiHv8ul0HeT/kqqw26ZO', '081318977078', 'Jl utama blok c no 8 rt 1 rw 7 perum griya satria indah sumampir, sumampir, purwokerto utara, banyumas');
 
+-- Dumping structure for table evotick.transaction_status
+CREATE TABLE IF NOT EXISTS `transaction_status` (
+  `transaction_status_id` char(50) NOT NULL,
+  `name` char(50) NOT NULL,
+  PRIMARY KEY (`transaction_status_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table evotick.transaction_status: ~0 rows (approximately)
+
 -- Dumping structure for table evotick.transactions
 CREATE TABLE IF NOT EXISTS `transactions` (
   `transaction_id` char(50) NOT NULL,
@@ -159,15 +168,6 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table evotick.tickets: ~0 rows (approximately)
-
--- Dumping structure for table evotick.transaction_status
-CREATE TABLE IF NOT EXISTS `transaction_status` (
-  `transaction_status_id` char(50) NOT NULL,
-  `name` char(50) NOT NULL,
-  PRIMARY KEY (`transaction_status_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Dumping data for table evotick.transaction_status: ~0 rows (approximately)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
