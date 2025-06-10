@@ -34,7 +34,7 @@ public class EventPackageRepository extends BaseRepository<EventPackage> {
     + "events.event_id, events.name as event_name, events.description, events.start_date, events.end_date, events.location, "
     + "event_status.status_id, event_status.name as status_name, "
     + "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, "
-    + "event_type.rules as type_rules, event_type.venue as type_venue "
+    + "event_type.rules as type_rules "
     + "from event_package "
     + "join events on event_package.event_id = events.event_id "
     + "join event_status on events.status_id = event_status.status_id "
@@ -44,7 +44,7 @@ public class EventPackageRepository extends BaseRepository<EventPackage> {
     + "events.event_id, events.name as event_name, events.description, events.start_date, events.end_date, events.location, "
     + "event_status.status_id, event_status.name as status_name, "
     + "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, "
-    + "event_type.rules as type_rules, event_type.venue as type_venue "
+    + "event_type.rules as type_rules "
     + "from event_package "
     + "join events on event_package.event_id = events.event_id "
     + "join event_status on events.status_id = event_status.status_id "
@@ -53,7 +53,7 @@ public class EventPackageRepository extends BaseRepository<EventPackage> {
     + "events.event_id, events.name as event_name, events.description, events.start_date, events.end_date, events.location, "
     + "event_status.status_id, event_status.name as status_name, "
     + "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, "
-    + "event_type.rules as type_rules, event_type.venue as type_venue "
+    + "event_type.rules as type_rules "
     + "from event_package "
     + "join events on event_package.event_id = events.event_id "
     + "join event_status on events.status_id = event_status.status_id "
@@ -145,7 +145,6 @@ public class EventPackageRepository extends BaseRepository<EventPackage> {
     type.setGuest(resultSet.getString("type_guest"));
     type.setDuration(resultSet.getTimestamp("type_duration"));
     type.setRules(resultSet.getString("type_rules"));
-    type.setVenue(resultSet.getString("type_venue"));
 
     event.setStatus(status);
     event.setType(type);

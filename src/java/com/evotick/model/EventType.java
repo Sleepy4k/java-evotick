@@ -24,8 +24,6 @@ public class EventType implements Serializable {
 
   private String rules;
 
-  private String venue;
-
   public EventType() {
   }
 
@@ -67,14 +65,6 @@ public class EventType implements Serializable {
 
   public void setRules(String rules) {
     this.rules = rules;
-  }
-
-  public String getVenue() {
-    return venue;
-  }
-
-  public void setVenue(String venue) {
-    this.venue = venue;
   }
 
 }

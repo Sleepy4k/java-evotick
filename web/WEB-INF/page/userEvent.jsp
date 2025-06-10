@@ -33,7 +33,7 @@
                     <c:forEach var="event" items="${events}">
                         <div class="col">
                             <div class="card h-100 shadow">
-                                <img src="assets/img/speakers/1.jpg" class="card-img-top" alt="Konser 1">
+                                <img src="${event.poster_url}" class="card-img-top" alt="Konser 1">
                                 <div class="card-body">
                                     <h5 class="card-title">${event.name}</h5>
                                     <p class="card-text">Tanggal: ${event.start_date}</p>

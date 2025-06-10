@@ -22,17 +22,17 @@ import java.util.List;
  */
 public class HistoryServiceImpl implements HistoryService {
 
-  @Override
-  public void showPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    Connection db = (Connection) request.getServletContext().getAttribute("db");
+    @Override
+    public void showPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Connection db = (Connection) request.getServletContext().getAttribute("db");
 
-    User user = (User) request.getServletContext().getAttribute("user");
-    List<Transaction> histories = new TransactionRepository().findCustom(db, "transactions.user_id", user.getId().toString());
-    
-    request.setAttribute("histories", histories);
+        User user = (User) request.getServletContext().getAttribute("user");
+        List<Transaction> histories = new TransactionRepository().findCustom(db, "transactions.user_id", user.getId().toString());
 
-    RequestDispatcher rds = request.getRequestDispatcher("/WEB-INF/page/userHistory.jsp");
-    rds.forward(request, response);
-  }
-  
+        request.setAttribute("histories", histories);
+
+        RequestDispatcher rds = request.getRequestDispatcher("/WEB-INF/page/userHistory.jsp");
+        rds.forward(request, response);
+    }
+
 }

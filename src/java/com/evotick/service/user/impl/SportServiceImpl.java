@@ -21,16 +21,16 @@ import java.util.List;
  */
 public class SportServiceImpl implements SportService {
 
-  @Override
-  public void showPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    Connection db = (Connection) request.getServletContext().getAttribute("db");
+    @Override
+    public void showPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Connection db = (Connection) request.getServletContext().getAttribute("db");
 
-    List<Event> sports = new EventRepository().findCustom(db, "event_type.title", "sport");
-    
-    request.setAttribute("sports", sports);
+        List<Event> sports = new EventRepository().findCustom(db, "event_type.title", "olahraga");
 
-    RequestDispatcher rds = request.getRequestDispatcher("WEB-INF/page/kategoriSport.jsp");
-    rds.forward(request, response);
-  }
+        request.setAttribute("sports", sports);
+
+        RequestDispatcher rds = request.getRequestDispatcher("WEB-INF/page/kategoriSport.jsp");
+        rds.forward(request, response);
+    }
 
 }

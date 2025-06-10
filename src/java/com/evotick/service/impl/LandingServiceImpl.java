@@ -26,8 +26,8 @@ public class LandingServiceImpl implements LandingService {
     Connection db = (Connection) request.getServletContext().getAttribute("db");
 
     List<Event> seminars = new EventRepository().findCustom(db, "event_type.title", "seminar");
-    List<Event> sports = new EventRepository().findCustom(db, "event_type.title", "sport");
-    List<Event> concerts = new EventRepository().findCustom(db, "event_type.title", "concert");
+    List<Event> sports = new EventRepository().findCustom(db, "event_type.title", "olahraga");
+    List<Event> concerts = new EventRepository().findCustom(db, "event_type.title", "konser");
     
     request.setAttribute("seminars", seminars);
     request.setAttribute("sports", sports);

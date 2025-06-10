@@ -36,6 +36,10 @@
         <servlet-name>TicketController</servlet-name>
         <servlet-class>com.evotick.controller.user.TicketController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EventAdminController</servlet-name>
+        <servlet-class>com.evotick.controller.admin.EventController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -75,6 +79,10 @@
     <servlet-mapping>
         <servlet-name>TicketController</servlet-name>
         <url-pattern>/ticket</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventAdminController</servlet-name>
+        <url-pattern>/dashboard/event</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

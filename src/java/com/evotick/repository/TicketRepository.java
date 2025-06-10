@@ -119,10 +119,13 @@ public class TicketRepository extends BaseRepository<Ticket> {
 
             Event event = new Event();
             event.setId(UUID.fromString(resultSet.getString("transaction_event_id")));
+            event.setLocation(resultSet.getString("event_location"));
+            event.setStart_date(resultSet.getTimestamp("event_start_date"));
             transaction.setEvent(event);
 
             User user = new User();
             user.setId(UUID.fromString(resultSet.getString("transaction_user_id")));
+            user.setFull_name(resultSet.getString("user_full_name"));
             transaction.setUser(user);
 
             transaction.setPurchased_at(resultSet.getTimestamp("transaction_purchased_at"));
@@ -149,9 +152,11 @@ public class TicketRepository extends BaseRepository<Ticket> {
         String sql = "select tickets.ticket_id, tickets.transaction_id, tickets.unique_code, "
                 + "transactions.transaction_id as transaction_transaction_id, transactions.event_id as transaction_event_id, transactions.user_id as transaction_user_id, "
                 + "transactions.purchased_at as transaction_purchased_at, transactions.amount as transaction_amount, transactions.status_id as transaction_status_id, transactions.package_id as transaction_package_id, "
+                + "events.location as event_location, events.start_date as event_start_date, "
                 + "users.user_id as user_user_id, users.username as user_username, users.full_name as user_full_name, users.email as user_email "
                 + "from tickets "
                 + "join transactions on tickets.transaction_id = transactions.transaction_id "
+                + "join events on transactions.event_id = events.event_id "
                 + "join users on transactions.user_id = users.user_id where " + key + " = ?";
 
         try (PreparedStatement statement = db.prepareStatement(sql)) {

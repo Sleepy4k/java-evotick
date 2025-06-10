@@ -25,7 +25,7 @@ public class ConcertServiceImpl implements ConcertService {
   public void showPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     Connection db = (Connection) request.getServletContext().getAttribute("db");
 
-    List<Event> concerts = new EventRepository().findCustom(db, "event_type.title", "concert");
+    List<Event> concerts = new EventRepository().findCustom(db, "event_type.title", "konser");
 
     request.setAttribute("concerts", concerts);
 

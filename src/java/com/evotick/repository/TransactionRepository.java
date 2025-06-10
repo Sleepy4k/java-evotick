@@ -37,7 +37,7 @@ public class TransactionRepository extends BaseRepository<Transaction> {
     + "events.event_id, events.name as event_name, events.description, events.start_date, events.end_date, events.location, "
     + "event_status.status_id as event_status_id, event_status.name as status_name, "
     + "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, "
-    + "event_type.rules as type_rules, event_type.venue as type_venue, "
+    + "event_type.rules as type_rules, "
     + "tickets.ticket_id, tickets.unique_code, "
     + "users.user_id, users.username as user_username, users.full_name as user_full_name, users.email as user_email "
     + "from transactions "
@@ -51,7 +51,7 @@ public class TransactionRepository extends BaseRepository<Transaction> {
     + "events.event_id, events.name as event_name, events.description, events.start_date, events.end_date, events.location, "
     + "event_status.status_id as event_status_id, event_status.name as status_name, "
     + "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, "
-    + "event_type.rules as type_rules, event_type.venue as type_venue, "
+    + "event_type.rules as type_rules, "
     + "tickets.ticket_id, tickets.unique_code, "
     + "users.user_id, users.username as user_username, users.full_name as user_full_name, users.email as user_email "
     + "from transactions "
@@ -64,7 +64,7 @@ public class TransactionRepository extends BaseRepository<Transaction> {
     + "events.event_id, events.name as event_name, events.description, events.start_date, events.end_date, events.location, "
     + "event_status.status_id as event_status_id, event_status.name as status_name, "
     + "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, "
-    + "event_type.rules as type_rules, event_type.venue as type_venue, "
+    + "event_type.rules as type_rules, "
     + "tickets.ticket_id, tickets.unique_code, "
     + "users.user_id, users.username as user_username, users.full_name as user_full_name, users.email as user_email "
     + "from transactions "
@@ -169,7 +169,6 @@ public class TransactionRepository extends BaseRepository<Transaction> {
     type.setGuest(resultSet.getString("type_guest"));
     type.setDuration(resultSet.getTimestamp("type_duration"));
     type.setRules(resultSet.getString("type_rules"));
-    type.setVenue(resultSet.getString("type_venue"));
 
     event.setStatus(status);
     event.setType(type);

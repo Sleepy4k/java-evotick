@@ -33,7 +33,7 @@ public class EventRepository extends BaseRepository<Event> {
   private final String DELETE_SQL = "delete from events where event_id = ?";
   private final String SELECT_ALL_SQL = "select events.event_id, events.name as event_name, events.description, events.start_date, events.end_date, events.location, events.status_id, events.type_id, events.penyelenggara, events.poster_url, events.created_by, " +
     "event_status.name as status_name, " +
-    "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, event_type.rules as type_rules, event_type.venue as type_venue, " +
+    "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, event_type.rules as type_rules, " +
     "admin.username as admin_username, admin.full_name as admin_full_name, admin.email as admin_email, admin.password as admin_password, " +
     "(select min(price) from event_package where event_package.event_id = events.event_id) as lowest_package_price " +
     "from events " +
@@ -43,7 +43,7 @@ public class EventRepository extends BaseRepository<Event> {
   private final String COUNT_SQL = "select count(event_id) as total from events";
   private final String SELECT_ONE_SQL = "select events.event_id, events.name as event_name, events.description, events.start_date, events.end_date, events.location, events.status_id, events.type_id, events.penyelenggara, events.poster_url, events.created_by, " +
     "event_status.name as status_name, " +
-    "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, event_type.rules as type_rules, event_type.venue as type_venue, " +
+    "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, event_type.rules as type_rules, " +
     "admin.username as admin_username, admin.full_name as admin_full_name, admin.email as admin_email, admin.password as admin_password, " +
     "(select min(price) from event_package where event_package.event_id = events.event_id) as lowest_package_price " +
     "from events " +
@@ -52,7 +52,7 @@ public class EventRepository extends BaseRepository<Event> {
     "join admin on events.created_by = admin.admin_id where event_id = ?";
   private final String SELECT_ONE_CUSTOM_SQL = "select events.event_id, events.name as event_name, events.description, events.start_date, events.end_date, events.location, events.status_id, events.type_id, events.penyelenggara, events.poster_url, events.created_by, " +
     "event_status.name as status_name, " +
-    "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, event_type.rules as type_rules, event_type.venue as type_venue, " +
+    "event_type.type_event_id, event_type.title as type_title, event_type.guest as type_guest, event_type.duration as type_duration, event_type.rules as type_rules, " +
     "admin.username as admin_username, admin.full_name as admin_full_name, admin.email as admin_email, admin.password as admin_password, " +
     "(select min(price) from event_package where event_package.event_id = events.event_id) as lowest_package_price " +
     "from events " +
@@ -149,7 +149,6 @@ public class EventRepository extends BaseRepository<Event> {
     type.setGuest(resultSet.getString("type_guest"));
     type.setDuration(resultSet.getTimestamp("type_duration"));
     type.setRules(resultSet.getString("type_rules"));
-    type.setVenue(resultSet.getString("type_venue"));
 
     event.setStatus(status);
     event.setType(type);
