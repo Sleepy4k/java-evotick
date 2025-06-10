@@ -295,15 +295,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="event" items="${events}">
+                                <c:forEach var="event" items="${events}" varStatus="loop">
                                     <tr>
-                                        <td>1</td>
+                                        <td>${loop.index + 1}</td>
                                         <td>${event.name}</td>
                                         <td>${event.start_date}</td>
                                         <td>${event.location}</td>
                                         <td><span class="badge bg-primary">${event.type.title}</span></td>
                                         <td>
-                                            <span class="badge bg-success">Aktif</span>
+                                            <span class="badge bg-success">${event.status.name}</span>
                                         </td>
                                         <td class="action-btns">
                                             <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editEventModal">
@@ -342,8 +342,8 @@
                             aria-label="Close"
                             ></button>
                     </div>
+                        <form method="post" action="${baseUrl}/admin-event">
                     <div class="modal-body">
-                        <form id="addEventForm">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama Acara</label>
                                 <input
@@ -382,45 +382,21 @@
                                     required
                                     />
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="totalTickets" class="form-label"
-                                           >Total Tiket</label
-                                    >
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        id="totalTickets"
-                                        required
-                                        />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="ticketPrice" class="form-label"
-                                           >Harga Tiket (IDR)</label
-                                    >
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        id="ticketPrice"
-                                        required
-                                        />
-                                </div>
-                            </div>
                             <div class="mb-3">
                                 <label for="eventType" class="form-label">Tipe</label>
                                 <select class="form-select" id="eventType" required>
-                                    <option value="concert">Konser</option>
+                                    <option value="konser">Konser</option>
                                     <option value="seminar">Seminar</option>
                                     <option value="olahraga">Olahraga</option>
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="eventDescription" class="form-label"
+                                <label for="description" class="form-label"
                                        >Deskripsi</label
                                 >
                                 <textarea
                                     class="form-control"
-                                    id="eventDescription"
+                                    id="description"
                                     rows="3"
                                     ></textarea>
                             </div>
@@ -433,7 +409,6 @@
                                     required
                                     />
                             </div>
-                        </form>
                     </div>
                     <div class="modal-footer">
                         <button
@@ -443,10 +418,11 @@
                             >
                             Batalkan
                         </button>
-                        <button type="button" class="btn btn-primary" id="saveEvent">
+                        <button type="submit" class="btn btn-primary" id="saveEvent">
                             Simpan Acara
                         </button>
                     </div>
+                        </form>
                 </div>
             </div>
         </div>
@@ -568,12 +544,8 @@
                         searchPlaceholder: "Search events...",
                     },
                     dom: '<"top"f>rt<"bottom"lip><"clear">',
-                    columnDefs: [
-                        {targets: [5, 7], orderable: false} // Disable sorting for Tickets and Actions
-                    ]
                 });
 
-                // Function to populate Edit Modal
                 function populateEditModal(eventId) {
                     var event = dummyEventData.find(e => e.id === eventId);
                     if (event) {
@@ -600,60 +572,25 @@
                     }
                 }
 
-                // Delegate click event for edit buttons
-                $('#eventsTable tbody').on('click', '.btn-outline-primary', function () {
-                    var row = $(this).closest('tr');
-                    var eventId = parseInt(eventsTable.row(row).data()[0]); // Assuming ID is in the first column
-                    populateEditModal(eventId);
-                    // Check if button should be disabled (it's already handled by the disabled attribute in HTML for sold out)
-                    if ($(this).is(':disabled')) {
-                        return false; // Prevent modal from opening if button is disabled
-                    }
-                    $('#editEventModal').modal('show');
-                });
-
-                // Save event button handler
-                $('#saveEvent').click(function () {
-                    // Basic form validation (add more robust validation as needed)
-                    if ($('#addEventForm')[0].checkValidity()) {
-                        // Here you would typically send data to server via AJAX
-                        alert('New event saved successfully!');
-                        $('#addEventModal').modal('hide');
-                        $('#addEventForm')[0].reset();
-                        // Potentially reload or add data to DataTable here
-                    } else {
-                        $('#addEventForm')[0].reportValidity(); // Show HTML5 validation messages
-                    }
-                });
-
-                // Update event button handler
-                $('#updateEvent').click(function () {
-                    if ($('#editEventForm')[0].checkValidity()) {
-                        var eventId = $('#editEventId').val();
-                        // Here you would typically send updated data to server via AJAX
-                        alert('Event ID ' + eventId + ' updated successfully!');
-                        $('#editEventModal').modal('hide');
-                        // Potentially reload or update data in DataTable here
-                    } else {
-                        $('#editEventForm')[0].reportValidity();
-                    }
-                });
-
-                // Delegate click event for delete buttons
                 $('#eventsTable tbody').on('click', '.delete-event', function () {
                     var row = $(this).closest('tr');
+                    console.log(row.data());
                     if (confirm('Are you sure you want to delete this event?')) {
-                        // Here you would typically send delete request to server
-                        eventsTable.row(row).remove().draw(false); // Remove row from DataTable
-                        alert('Event deleted successfully!');
+                        eventsTable.row(row).remove().draw(false);
+                        fetch('${baseUrl}/admin-event', {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ id: row.data()[0] })
+                        }).then(response => {
+                            if (response.ok) {
+                                alert('Event deleted successfully');
+                            } else {
+                                alert('Failed to delete event');
+                            }
+                        });
                     }
-                });
-
-                // Add animation to table rows
-                $('#eventsTable tbody').on('mouseenter', 'tr', function () {
-                    $(this).css('transform', 'translateX(3px)');
-                }).on('mouseleave', 'tr', function () {
-                    $(this).css('transform', 'translateX(0)');
                 });
             });
         </script>

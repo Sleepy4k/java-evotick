@@ -12,29 +12,31 @@
         </div>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="admin_event.html">
+                <a class="nav-link" href="${baseUrl}/admin-event">
                     <i class="fas fa-calendar-alt"></i> Acara
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="admin_package.html">
+                <a class="nav-link" href="${baseUrl}/admin-package">
                     <i class="fas fa-box-open"></i> Package Event
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin_ticket.html">
+                <a class="nav-link" href="${baseUrl}/admin-ticket">
                     <i class="fas fa-ticket-alt"></i> Tiket
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin_user.html">
+                <a class="nav-link" href="${baseUrl}/admin-user">
                     <i class="fas fa-users"></i> Pengguna
                 </a>
             </li>
             <li class="nav-item mt-4">
-                <a class="nav-link text-danger" href="index.html">
-                    <i class="fas fa-sign-out-alt"></i> Keluar
-                </a>
+                <a class="nav-link text-danger" href="#" onclick="event.preventDefault();
+                    if (confirm('Are you sure you want to log out?')) {
+                        document.getElementById('logout-form').submit();
+                    }"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+                <form id="logout-form" action="${baseUrl}/logout" method="POST" style="display: none;"></form>
             </li>
         </ul>
     </div>

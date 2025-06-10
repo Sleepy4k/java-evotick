@@ -40,6 +40,18 @@
         <servlet-name>EventAdminController</servlet-name>
         <servlet-class>com.evotick.controller.admin.EventController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PackageAdminController</servlet-name>
+        <servlet-class>com.evotick.controller.admin.PackageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TicketAdminController</servlet-name>
+        <servlet-class>com.evotick.controller.admin.TicketController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserAdminController</servlet-name>
+        <servlet-class>com.evotick.controller.admin.UserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -83,6 +95,18 @@
     <servlet-mapping>
         <servlet-name>EventAdminController</servlet-name>
         <url-pattern>/admin-event</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PackageAdminController</servlet-name>
+        <url-pattern>/admin-package</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TicketAdminController</servlet-name>
+        <url-pattern>/admin-ticket</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserAdminController</servlet-name>
+        <url-pattern>/admin-user</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

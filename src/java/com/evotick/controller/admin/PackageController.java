@@ -4,8 +4,8 @@
  */
 package com.evotick.controller.admin;
 
-import com.evotick.service.admin.EventService;
-import com.evotick.service.admin.impl.EventServiceImpl;
+import com.evotick.service.admin.PackageService;
+import com.evotick.service.admin.impl.PackageServiceImpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -14,14 +14,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author LENOVO
+ * @author Pandu
  */
-public class EventController extends HttpServlet {
+public class PackageController extends HttpServlet {
 
-  EventService service = null;
+  PackageService service = null;
 
-  public EventController() {
-    service = new EventServiceImpl();
+  public PackageController() {
+    service = new PackageServiceImpl();
   }
 
   /**

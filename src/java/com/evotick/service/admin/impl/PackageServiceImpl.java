@@ -4,10 +4,9 @@
  */
 package com.evotick.service.admin.impl;
 
-import com.evotick.model.Event;
-import com.evotick.repository.EventRepository;
-import com.evotick.repository.TicketRepository;
-import com.evotick.service.admin.EventService;
+import com.evotick.model.EventPackage;
+import com.evotick.repository.EventPackageRepository;
+import com.evotick.service.admin.PackageService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,32 +17,19 @@ import java.util.List;
 
 /**
  *
- * @author LENOVO
+ * @author Pandu
  */
-public class EventServiceImpl implements EventService {
+public class PackageServiceImpl implements PackageService {
 
   @Override
   public void showPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     Connection db = (Connection) request.getServletContext().getAttribute("db");
 
-    List<Event> events = new EventRepository().select(db, 0, 100);
+    List<EventPackage> packages = new EventPackageRepository().select(db, 0, 100);
 
-    int totalEvent = events.size();
-    long totalTicket = new TicketRepository().count(db);
-    long totalEventOnGoing = events.stream()
-      .filter(event -> event.getEnd_date().before(new java.util.Date()))
-      .count();
-    long totalEventFinished = events.stream()
-      .filter(event -> event.getEnd_date().after(new java.util.Date()))
-      .count();
+    request.setAttribute("packages", packages);
 
-    request.setAttribute("events", events);
-    request.setAttribute("totalEvent", totalEvent);
-    request.setAttribute("totalTicket", totalTicket);
-    request.setAttribute("totalEventOnGoing", totalEventOnGoing);
-    request.setAttribute("totalEventFinished", totalEventFinished);
-
-    RequestDispatcher rds = request.getRequestDispatcher("WEB-INF/page/adminEvent.jsp");
+    RequestDispatcher rds = request.getRequestDispatcher("WEB-INF/page/adminPackage.jsp");
     rds.forward(request, response);
   }
 
